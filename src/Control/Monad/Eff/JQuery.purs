@@ -54,6 +54,9 @@ module Control.Monad.Eff.JQuery
   , getMetaKey
   , clone
   , cloneWithDataAndEvents
+  , setData
+  , getData
+  , removeData
   ) where
 
 import Prelude (Unit)
@@ -399,3 +402,28 @@ foreign import cloneWithDataAndEvents
   :: forall eff
    . JQuery
   -> Eff (dom :: DOM | eff) JQuery
+
+-- | Store arbitrary data associated with
+-- | the matched elements.
+foreign import setData
+  :: forall a eff
+   . String
+  -> a
+  -> JQuery
+  -> Eff (dom :: DOM | eff) Unit
+
+-- | Return the value at the named data store for
+-- | the first  element in the jQuery collection.
+foreign import getData
+  :: forall eff
+   . String
+  -> JQuery
+  -> Eff (dom :: DOM | eff) Foreign
+
+-- | Remove a previously-stored piece of data.
+foreign import removeData
+  :: forall eff
+   . String
+  -> JQuery
+  -> Eff (dom :: DOM | eff) Unit
+

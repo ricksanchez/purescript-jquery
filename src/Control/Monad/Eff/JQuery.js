@@ -334,3 +334,29 @@ exports.cloneWithDataAndEvents = function(ob) {
         return ob.clone(true);
     };
 };
+
+exports.setData = function(key) {
+    return function(val) {
+        return function(ob) {
+            return function() {
+                ob.data(key, val);
+            };
+        };
+    };
+};
+
+exports.getData = function(key) {
+    return function(ob) {
+        return function() {
+            return ob.data(key);
+        };
+    };
+};
+
+exports.removeData = function(key) {
+    return function(ob) {
+        return function() {
+            return ob.removeData(key);
+        };
+    };
+};
